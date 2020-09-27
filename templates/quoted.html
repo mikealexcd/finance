@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block main %}
+    <h2 class="display-3">{{stock.get('name')}} ({{stock.get('symbol')}})</h2>
+        <h3 class"display-4">Price: ${{stock.get('price')}}</h3>
+{% endblock %}

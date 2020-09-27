@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block main %}
+        {% if check != 0 %}
+            <h2 class="display-4 mb-4">Here are your stocks</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Stock</th>
+                        <th>Symbol</th>
+                        <th>Number of shares</th>
+                        <th>Current price</th>
+                        <th>Total value</th>
+                    </tr>
+                </thead>
+            {% for row in stockinfo %}
+               {% if row["shares"]>0 %}
+                    <tr>
+                        <td scope="row">{{row["title"]}}</td>
+                        <td>{{row["symbol"]}}</td>
+                        <td>{{row["shares"]}}</td>
+                        <td>${{row["current_price"]}}</td>
+                        <td>${{row["stocktotal"]|round(2)}}</td>
+
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr>
+                <td scope="row" colspan="2">Total cash: ${{cash|round(2)}}</td>
+                <td colspan="3">Grand Total: ${{grandtotal|round(2)}}</td>
+            </tr>
+            </table>
+        {% else %}
+        <h3 class="display-4">You have no stocks :(</h3>
+        {% endif %}
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+        {% if check != 0 %}
+            <h2 class="display-3">Transaction History</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Stock</th>
+                        <th>Symbol</th>
+                        <th>Buy or Sell</th>
+                        <th>Number of shares</th>
+                        <th>Value of Transaction</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+            {% for row in stockinfo %}
+                <tr>
+                    <td scope="row">{{row["title"]}}</td>
+                    <td>{{row["symbol"]}}</td>
+                    <td>{{row["type"]}}</td>
+                    {% if row["type"] == "sell" %}
+                    <td>{{row["shares"] * -1}}</td>
+                    {% else %}
+                    <td>{{row["shares"]}}</td>
+                    {% endif %}
+                    {% if row["type"] == "sell" %}
+                    <td>${{row["value"]|round(2)}}</td>
+                    {% else %}
+                    <td>${{row["value"]|round(2) * -1}}</td>
+                    {% endif %}
+                    <td>{{row["trans_date"]}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        {% else %}
+        <h3 class="display-4">You have made no transactions</h3>
+        {% endif %}
+
+{% endblock %}
